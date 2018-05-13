@@ -1,0 +1,9 @@
+create_contacto:
+    path:      /create
+    defaults:  { _controller: TissiBundle:Contacto:create }
+    methods:   [POST]
+
+list_contacto:
+    path:      /list
+    defaults:  { _controller: TissiBundle:Contacto:list }
+    methods:   [GET]

@@ -1,0 +1,3 @@
+tissi:
+    resource: "@TissiBundle/Router/contacto_router.yml"
+    prefix:   /
