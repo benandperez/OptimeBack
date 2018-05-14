@@ -35,7 +35,6 @@ class ContactoController extends Controller
 		$telefono = $contactoData["telefono"];
 		$tipo_de_cliente = $contactoData["tipo_de_cliente"];
 		$comentarios = $contactoData["comentarios"];
-		$adjuntar = $contactoData["adjuntar"];
 	   	
 	   	$contacto->setNombre($nombres);
 		$contacto->setApellido($apellidos);
