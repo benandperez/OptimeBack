@@ -74,16 +74,26 @@ class ContactoController extends Controller
 	    return new JsonResponse($arrayContactos);
 	}
 
-	public function validarUsuarioAction($correo,$contrasena)
-	{
-		 $em = $this->getDoctrine()->getManager();
-		 $userRepository = $em->getRepository("UserBundle:UserPs");
+	public function borrarAction($id) {
+ 
+ 
+        //Entity Manager
+        $em = $this->getDoctrine()->getEntityManager();
+        $posts = $em->getRepository("TissiBundle:Contacto");
+ 
+        $post = $posts->find($id);
+        $em->remove($post);
+        $flush=$em->flush();
+ 
+        if ($flush == null) {
+            echo "Contacto se ha borrado correctamente";
+        } else {
+            echo "El post no se ha borrado";
+        }
+ 
+ 
+        die();
+    }
 
-		 $user = $userRepository->findOneBy(array("correo"=>$correo,"contrasena"=>$contrasena));
-		 if($user){
-	    	return new JsonResponse(array("usuariook"=>true,"mensaje"=>"usuario validado"));
-		 }else{
-		 	return new JsonResponse(array("usuariook"=>false,"mensaje"=>"usuario o contraseña incorrecto."));
-		 }
-	}
+	
 }

@@ -21,7 +21,7 @@ CREATE TABLE `userfiles` (
   `ID` int(11) NOT NULL,
   `FilePath` varchar(250) NOT NULL,
   `FileName` varchar(250) NOT NULL,
-  `idContact` varchar(250) NOT NULL
+  `idContact` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
