@@ -1,3 +1,8 @@
+optime:
+    resource: "@OptimeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 tissi:
     resource: "@TissiBundle/Router/contacto_router.yml"
     prefix:   /

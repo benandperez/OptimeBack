@@ -1,0 +1,3 @@
+product:
+    resource: "@ProductBundle/Router/product_router/product_router.yml"
+    prefix:   /product

@@ -1,0 +1,13 @@
+create_product:
+    path:      /create
+    defaults:  { _controller: OptimeBundle:Product:create }
+    methods:   [POST]
+
+list_product:
+    path:      /list
+    defaults:  { _controller: OptimeBundle:Product:list }
+    methods:   [GET]
+
+borrar_product:
+    path:      /delete/{id}
+    defaults:  { _controller: OptimeBundle:Product:delete }
