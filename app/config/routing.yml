@@ -1,6 +1,5 @@
 optime:
-    resource: "@OptimeBundle/Controller/"
-    type:     annotation
+    resource: "@OptimeBundle/Router/product_router.yml"
     prefix:   /
 
 tissi:

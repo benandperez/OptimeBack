@@ -1,3 +1,7 @@
 product:
-    resource: "@ProductBundle/Router/product_router/product_router.yml"
+    resource: "@OptimeBundle/Router/product_router/product_router.yml"
     prefix:   /product
+
+category:
+    resource: "@OptimeBundle/Router/product_router/category_router.yml"
+    prefix:   /category

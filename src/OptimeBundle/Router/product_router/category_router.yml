@@ -1,0 +1,13 @@
+create_category:
+    path:      /createcategory
+    defaults:  { _controller: OptimeBundle:Category:createCategory }
+    methods:   [POST]
+
+list_category:
+    path:      /listcategory
+    defaults:  { _controller: OptimeBundle:Category:listCategory }
+    methods:   [GET]
+
+delete_category:
+    path:      /deletecategory/{id}
+    defaults:  { _controller: OptimeBundle:Category:deleteCategory }

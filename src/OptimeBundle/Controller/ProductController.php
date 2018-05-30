@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller
 {
-	public function createAction(Request $request)
+	public function createProductAction(Request $request)
 	{
 
 		$content = $request->getContent();
@@ -18,10 +18,12 @@ class ProductController extends Controller
 		$product = null;
 		$isUpdate = false;
 		$id = null;
+
 		if (isset($productData["id"])) {
 			$id = $productData["id"];
 			# code...
 		}
+
 		if($id != null){			
 			$repository = $this->getDoctrine()->getRepository(Product::class);
 			$product = $repository->findOneById($id);  
@@ -29,19 +31,20 @@ class ProductController extends Controller
 		}else{
 			$product = new Product();
 		}
-		$nombres = $productData["nombres"];		
-		$apellidos = $productData["apellidos"];
-		$correo = $productData["correo"];		
-		$telefono = $productData["telefono"];
-		$tipo_de_cliente = $productData["tipo_de_cliente"];
-		$comentarios = $productData["comentarios"];
+
+		$code = $productData["code"];		
+		$name = $productData["name"];
+		$description = $productData["description"];		
+		$mark = $productData["mark"];
+		$category = $productData["category"];
+		$price = $productData["price"];
 	   	
-	   	$product->setNombre($nombres);
-		$product->setApellido($apellidos);
-		$product->setTelefono($telefono);
-		$product->setCorreo($correo);
-		$product->setTipoDeCliente($tipo_de_cliente);
-		$product->setComentarios($comentarios);
+	   	$product->setCode($code);
+		$product->setName($name);
+		$product->setDescription($description);
+		$product->setMake($mark);
+		$product->setCategory($category);
+		$product->setPrice($price);
 
 	    $em = $this->getDoctrine()->getManager();
 	    if(!$isUpdate){
@@ -54,8 +57,8 @@ class ProductController extends Controller
 	    //return new Response('Created product id mmm');
 	}
 
-	public function listAction(Request $request)
-	{		
+	public function listProductAction(Request $request)
+	{	
 		$repository = $this->getDoctrine()->getRepository(Product::class);
 		$products = $repository->findAll();
 		$arrayproducts = array();
@@ -63,18 +66,18 @@ class ProductController extends Controller
 		foreach ($products as $key => $value) {
 			$product = array();
 			$product["id"] = $value->getId();
-			$product["nombre"] = $value->getNombre();
-			$product["apellido"] = $value->getApellido();
-			$product["telefono"] = $value->getTelefono();
-			$product["correo"] = $value->getCorreo();
-			$product["tipo_de_cliente"] = $value->getTipoDeCliente();
-			$product["comentarios"] = $value->getComentarios();
+			$product["code"] = $value->getCode();
+			$product["name"] = $value->getName();
+			$product["description"] = $value->setDescription();
+			$product["mark"] = $value->getMark();
+			$product["category"] = $value->getCategory();
+			$product["price"] = $value->getPrice();
 			$arrayproducts[] = $product;
 		}
 	    return new JsonResponse($arrayproducts);
 	}
 
-	public function borrarAction($id) {
+	public function deleteProductAction($id) {
  
  
         //Entity Manager
@@ -88,7 +91,7 @@ class ProductController extends Controller
         if ($flush == null) {
             echo "Producto se ha borrado correctamente";
         } else {
-            echo "El post no se ha borrado";
+            echo "El Producto no se ha borrado";
         }
  
  

@@ -19,7 +19,7 @@ class Product
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, unique = true)
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min = "4",
@@ -31,7 +31,7 @@ class Product
     protected $code;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique = true)
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min = "4",
