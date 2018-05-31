@@ -113,5 +113,33 @@ class ProductController extends Controller
         die();
     }
 
+    public function searchProductAction(Request $request)
+	{	
+		$em = $this->getDoctrine()->getManager();
+		$content = $request->getContent();
+		$productData = json_decode($content, true);
+		$repository = $this->getDoctrine()->getRepository(Product::class);
+		$productOne = $repository->findOneBy(array('code' => $productData["code"]));
+		$arrayCategoryProduct = array();
+		$repositoryCategory = $em->getRepository('OptimeBundle:Category');
+		$valueCate = null;
+
+		$valueCate = $repositoryCategory->find($productOne->getCategory()->getId());
+
+		$arrayCategoryProduct["name"] =$valueCate->getName();
+		$arrayCategoryProduct["active"] =$valueCate->getActive();
+
+		$product = array();
+		$product["id"] = $productOne->getId();
+		$product["code"] = $productOne->getCode();
+		$product["name"] = $productOne->getName();
+		$product["description"] = $productOne->getDescription();
+		$product["make"] = $productOne->getMake();
+		$product["category"] = $arrayCategoryProduct;
+		$product["price"] = $productOne->getPrice();
+
+	    return new JsonResponse($product);
+	}
+
 	
 }

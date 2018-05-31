@@ -11,3 +11,8 @@ list_product:
 delete_product:
     path:      /deleteproduct/{id}
     defaults:  { _controller: OptimeBundle:Product:deleteProduct }
+
+search_product:
+    path:      /searchproduct
+    defaults:  { _controller: OptimeBundle:Product:searchProduct }
+    methods:   [POST]
