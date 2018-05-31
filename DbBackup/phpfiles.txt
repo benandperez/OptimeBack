@@ -7,16 +7,3 @@ CREATE DATABASE optime (sql)
 php bin/console doctrine:schema:update --dump-sql (Crear tablas)
 
 php bin/console doctrine:schema:update --force (Actualizar para visualizar tablas)
-
-[
-{"id":1,"code":"jjffff","name":"hi","description":"hola","active":false},
-{"id":9,"code":"jj","name":"jj","description":"jj","active":true},
-{"id":10,"code":"ff","name":"fffffff","description":"fff","active":true},
-{"id":11,"code":"ee","name":"ee","description":"ee","active":true},
-{"id":12,"code":"ccc","name":"cccc","description":"cccc","active":true},
-{"id":13,"code":"nnn","name":"nnn","description":"nnn","active":true},
-{"id":14,"code":"kkk","name":"kkk","description":"kkk","active":true},
-{"id":17,"code":"ttt","name":"ttt","description":"ttt","active":false},
-{"id":18,"code":"zzz","name":"zzz","description":"zzz","active":true},
-{"id":19,"code":"aaa","name":"aaaa","description":"aaaa","active":false},
-{"id":20,"code":"qwqw","name":"qwqw","description":"qwqw","active":false}]

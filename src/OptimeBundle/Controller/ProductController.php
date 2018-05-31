@@ -96,7 +96,6 @@ class ProductController extends Controller
 	public function deleteProductAction($id) {
  
  
-        //Entity Manager
         $em = $this->getDoctrine()->getEntityManager();
         $posts = $em->getRepository("OptimeBundle:Product");
  
