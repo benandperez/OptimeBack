@@ -93,5 +93,26 @@ class CategoryController extends Controller
         die();
     }
 
+    public function searchCategoryAction(Request $request)
+	{	
+		$repository = $this->getDoctrine()->getRepository(Category::class);
+		$content = $request->getContent();
+		$categoryData = json_decode($content, true);
+		$categoryOne = $repository->findOneBy(array('code' => $categoryData["code"]));
+
+		if ($categoryOne) {
+			$category = array();
+			$category["id"] = $categoryOne->getId();
+			$category["code"] = $categoryOne->getCode();
+			$category["name"] = $categoryOne->getName();
+			$category["description"] = $categoryOne->getDescription();
+			$category["active"] = $categoryOne->getActive();
+			# code...
+		}
+			
+
+	    return new JsonResponse($category);
+	}
+
 	
 }

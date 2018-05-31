@@ -124,19 +124,24 @@ class ProductController extends Controller
 		$repositoryCategory = $em->getRepository('OptimeBundle:Category');
 		$valueCate = null;
 
-		$valueCate = $repositoryCategory->find($productOne->getCategory()->getId());
-
-		$arrayCategoryProduct["name"] =$valueCate->getName();
-		$arrayCategoryProduct["active"] =$valueCate->getActive();
-
 		$product = array();
-		$product["id"] = $productOne->getId();
-		$product["code"] = $productOne->getCode();
-		$product["name"] = $productOne->getName();
-		$product["description"] = $productOne->getDescription();
-		$product["make"] = $productOne->getMake();
-		$product["category"] = $arrayCategoryProduct;
-		$product["price"] = $productOne->getPrice();
+		
+		if ($productOne) {
+			$valueCate = $repositoryCategory->find($productOne->getCategory()->getId());
+
+			$arrayCategoryProduct["name"] =$valueCate->getName();
+			$arrayCategoryProduct["active"] =$valueCate->getActive();
+
+			$product["id"] = $productOne->getId();
+			$product["code"] = $productOne->getCode();
+			$product["name"] = $productOne->getName();
+			$product["description"] = $productOne->getDescription();
+			$product["make"] = $productOne->getMake();
+			$product["category"] = $arrayCategoryProduct;
+			$product["price"] = $productOne->getPrice();
+			# code...
+		}
+		
 
 	    return new JsonResponse($product);
 	}

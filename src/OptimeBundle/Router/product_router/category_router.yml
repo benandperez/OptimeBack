@@ -11,3 +11,8 @@ list_category:
 delete_category:
     path:      /deletecategory/{id}
     defaults:  { _controller: OptimeBundle:Category:deleteCategory }
+
+search_category:
+    path:      /searchcategory
+    defaults:  { _controller: OptimeBundle:Category:searchCategory }
+    methods:   [POST]
