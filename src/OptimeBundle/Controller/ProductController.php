@@ -13,12 +13,14 @@ class ProductController extends Controller
 	public function createProductAction(Request $request)
 	{
 
+		$em = $this->getDoctrine()->getManager();
 		$content = $request->getContent();
 		$productData = json_decode($content, true);
 		$product = null;
 		$isUpdate = false;
 		$id = null;
-
+		$repositoryCategory = $em->getRepository('OptimeBundle:Category');
+        
 		if (isset($productData["id"])) {
 			$id = $productData["id"];
 			# code...
@@ -32,17 +34,20 @@ class ProductController extends Controller
 			$product = new Product();
 		}
 
+
+
 		$code = $productData["code"];		
 		$name = $productData["name"];
 		$description = $productData["description"];		
-		$mark = $productData["mark"];
-		$category = $productData["category"];
+		$make = $productData["make"];
+		$category = $repositoryCategory->findOneById($productData["category"]); 
 		$price = $productData["price"];
+
 	   	
 	   	$product->setCode($code);
 		$product->setName($name);
 		$product->setDescription($description);
-		$product->setMake($mark);
+		$product->setMake($make);
 		$product->setCategory($category);
 		$product->setPrice($price);
 
@@ -59,18 +64,29 @@ class ProductController extends Controller
 
 	public function listProductAction(Request $request)
 	{	
+		$em = $this->getDoctrine()->getManager();
 		$repository = $this->getDoctrine()->getRepository(Product::class);
 		$products = $repository->findAll();
 		$arrayproducts = array();
+		$arrayCategoryProduct = array();
+		$repositoryCategory = $em->getRepository('OptimeBundle:Category');
+		$valueCate = null;
+
 
 		foreach ($products as $key => $value) {
+			$valueCate = $repositoryCategory->find($value->getCategory()->getId());
+			$arrayCategoryProduct["id"] =$valueCate->getId();
+			$arrayCategoryProduct["code"] =$valueCate->getCode();
+			$arrayCategoryProduct["name"] =$valueCate->getName();
+			$arrayCategoryProduct["active"] =$valueCate->getActive();
+
 			$product = array();
 			$product["id"] = $value->getId();
 			$product["code"] = $value->getCode();
 			$product["name"] = $value->getName();
-			$product["description"] = $value->setDescription();
-			$product["mark"] = $value->getMark();
-			$product["category"] = $value->getCategory();
+			$product["description"] = $value->getDescription();
+			$product["make"] = $value->getMake();
+			$product["category"] = $arrayCategoryProduct;
 			$product["price"] = $value->getPrice();
 			$arrayproducts[] = $product;
 		}
